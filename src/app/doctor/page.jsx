@@ -28,7 +28,6 @@
 
 
 
-
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -54,9 +53,21 @@ const expertise = [
 ];
 
 const credentials = [
-  { icon: "🏥", title: "KMCT", text: "Clinical experience in a multi-specialty hospital setting." },
-  { icon: "🌍", title: "Dubai Ayurveda Clinic", text: "Exposure to diverse patient needs across cultures." },
-  { icon: "⏳", title: "10+ Years", text: "Professional experience in Ayurvedic care." },
+  {
+    icon: "🏥",
+    title: "KMCT",
+    text: "Clinical experience in a multi-specialty hospital setting.",
+  },
+  {
+    icon: "🌍",
+    title: "Dubai Ayurveda Clinic",
+    text: "Exposure to diverse patient needs across cultures.",
+  },
+  {
+    icon: "⏳",
+    title: "10+ Years",
+    text: "Professional experience in Ayurvedic care.",
+  },
 ];
 
 function Page() {
@@ -83,11 +94,13 @@ function Page() {
               10 years of professional experience in providing personalized
               Ayurvedic care and wellness guidance.
             </p>
+
             <p>
               She has gained valuable clinical experience through her work
               at KMCT and an Ayurveda clinic in Dubai, giving her exposure
               to diverse patient needs and healthcare environments.
             </p>
+
             <p>
               Through ARAYAL, Dr. Princy brings her experience and
               Ayurvedic knowledge to convenient online consultations,
@@ -116,6 +129,7 @@ function Page() {
       {/* Expertise */}
       <section className="expertise">
         <h2>Areas of Expertise</h2>
+
         <div className="expertise-grid">
           {expertise.map((e) => (
             <div className="expertise-item" key={e.title}>
@@ -130,6 +144,7 @@ function Page() {
       <section className="cta-banner">
         <h2>Begin your consultation with Dr. Princy</h2>
         <p>Personalized Ayurvedic guidance, from wherever you are.</p>
+
         <Link href="/booking" className="btn-primary">
           Book a Consultation
         </Link>
@@ -144,10 +159,16 @@ function Page() {
           --ink: #1d2b20;
         }
 
+        * {
+          box-sizing: border-box;
+        }
+
         .doctor-page {
           font-family: var(--font-body), sans-serif;
           color: var(--ink);
           background: #fffdf8;
+          width: 100%;
+          overflow-x: hidden;
         }
 
         .eyebrow {
@@ -160,26 +181,28 @@ function Page() {
           padding: 0.35rem 0.9rem;
           border-radius: 999px;
           margin-bottom: 1rem;
-          margin-top:100px
+          margin-top: 100px;
         }
 
         /* Hero section + contained card */
         .hero-section {
-        padding: 3rem 2rem;
-        display: flex;
-        justify-content: center;
+          padding: 3rem 2rem;
+          display: flex;
+          justify-content: center;
+          width: 100%;
         }
 
         .doctor-card {
-        display: flex;
-        align-items: center;
-        gap: 2.5rem;
-        max-width: 1200px;
-        width: 100%;
-        background: #ffffff;
-        border-radius: 2px;
-        padding: 2.5rem 3rem;
+          display: flex;
+          align-items: center;
+          gap: 2.5rem;
+          max-width: 1200px;
+          width: 100%;
+          background: #ffffff;
+          border-radius: 2px;
+          padding: 2.5rem 3rem;
         }
+
         .doctor-photo-wrap {
           flex-shrink: 0;
         }
@@ -196,6 +219,7 @@ function Page() {
 
         .doctor-info {
           flex: 1;
+          min-width: 0;
         }
 
         .doctor-info h1 {
@@ -226,7 +250,7 @@ function Page() {
           padding: 0.7rem 1.6rem;
           text-decoration: none;
           transition: background 0.2s ease, transform 0.15s ease;
-          margin-left:160px;
+          margin-left: 160px;
         }
 
         .btn-primary:hover {
@@ -236,14 +260,15 @@ function Page() {
 
         /* Credentials */
         .credentials {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 2rem 4rem;
-            flex-wrap: wrap;
-            }
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          max-width: 1300px;
+          margin: 0 auto;
+          padding: 0 2rem 4rem;
+          flex-wrap: wrap;
+          width: 100%;
+        }
 
         .credential-card {
           flex: 1 1 260px;
@@ -280,6 +305,7 @@ function Page() {
           background: var(--sandalwood);
           padding: 4rem 1.5rem;
           text-align: center;
+          width: 100%;
         }
 
         .expertise h2 {
@@ -295,6 +321,7 @@ function Page() {
           gap: 1.2rem;
           max-width: 1000px;
           margin: 0 auto;
+          width: 100%;
         }
 
         .expertise-item {
@@ -304,11 +331,13 @@ function Page() {
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
           gap: 0.5rem;
           font-weight: 500;
           font-size: 0.92rem;
           color: var(--ink);
           box-shadow: 0 4px 14px rgba(47, 74, 52, 0.07);
+          min-width: 0;
         }
 
         .expertise-icon {
@@ -321,6 +350,7 @@ function Page() {
           background: var(--leaf-green);
           color: var(--sandalwood);
           padding: 4rem 1.5rem;
+          width: 100%;
         }
 
         .cta-banner h2 {
@@ -335,28 +365,215 @@ function Page() {
           opacity: 0.9;
         }
 
-        /* Responsive */
-        @media (max-width: 800px) {
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1000px) {
           .doctor-card {
-            flex-direction: column;
-            text-align: center;
-            padding: 2rem 1.5rem;
+            gap: 2rem;
+            padding: 2rem;
           }
+
+          .doctor-photo {
+            width: 230px;
+            height: 230px;
+          }
+
+          .btn-primary {
+            margin-left: 80px;
+          }
+
           .expertise-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+          .hero-section {
+            padding: 2rem 1rem;
+          }
+
+          .doctor-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            gap: 1.5rem;
+          }
+
+          .doctor-photo {
+            width: 220px;
+            height: 220px;
+          }
+
+          .eyebrow {
+            margin-top: 0;
+          }
+
+          .doctor-info h1 {
+            font-size: 2.2rem;
+          }
+
+          .doctor-info p {
+            font-size: 0.95rem;
+          }
+
+          .btn-primary {
+            margin-left: 0;
+          }
+
+          .credentials {
+            padding: 0 1rem 3rem;
+            gap: 1rem;
+          }
+
+          .credential-card {
+            width: 100%;
+            max-width: 100%;
+            flex: 1 1 100%;
+          }
+
+          .expertise {
+            padding: 3rem 1rem;
+          }
+
+          .expertise-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+
+          .expertise-item {
+            min-height: 120px;
+          }
+
+          .cta-banner {
+            padding: 3rem 1rem;
+          }
+
+          .cta-banner h2 {
+            font-size: 1.8rem;
+          }
+
+          .cta-banner p {
+            font-size: 0.95rem;
+          }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
         @media (max-width: 600px) {
+          .hero-section {
+            padding: 1.5rem 0.75rem;
+          }
+
+          .doctor-card {
+            padding: 1.5rem 1rem;
+          }
+
           .doctor-photo {
             width: 200px;
             height: 200px;
           }
+
           .doctor-info h1 {
             font-size: 2rem;
           }
+
+          .doctor-info p {
+            font-size: 0.92rem;
+            line-height: 1.6;
+          }
+
+          .btn-primary {
+            font-size: 1rem;
+            padding: 0.7rem 1.2rem;
+            margin-left: 0;
+            max-width: 100%;
+          }
+
+          .credentials {
+            padding: 0 0.75rem 2.5rem;
+          }
+
+          .credential-card {
+            padding: 1.5rem 1rem;
+          }
+
+          .expertise {
+            padding: 2.5rem 0.75rem;
+          }
+
+          .expertise h2 {
+            font-size: 1.8rem;
+          }
+
           .expertise-grid {
             grid-template-columns: 1fr;
+            gap: 0.9rem;
+          }
+
+          .expertise-item {
+            min-height: auto;
+            padding: 1.2rem 0.8rem;
+          }
+
+          .cta-banner {
+            padding: 2.75rem 1rem;
+          }
+
+          .cta-banner h2 {
+            font-size: 1.7rem;
+          }
+
+          .cta-banner p {
+            font-size: 0.9rem;
+          }
+        }
+
+        /* =========================
+           VERY SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 400px) {
+          .doctor-photo {
+            width: 180px;
+            height: 180px;
+          }
+
+          .doctor-info h1 {
+            font-size: 1.8rem;
+          }
+
+          .doctor-info p {
+            font-size: 0.88rem;
+          }
+
+          .eyebrow {
+            font-size: 0.78rem;
+            padding: 0.3rem 0.7rem;
+          }
+
+          .btn-primary {
+            width: 100%;
+            text-align: center;
+          }
+
+          .credential-card h4 {
+            font-size: 1.1rem;
+          }
+
+          .credential-card p {
+            font-size: 0.85rem;
+          }
+
+          .cta-banner h2 {
+            font-size: 1.5rem;
           }
         }
       `}</style>
