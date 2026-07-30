@@ -47,27 +47,12 @@
 
 // export default Header;
 
-
 "use client";
 import Link from 'next/link';
-import { Cormorant_Garamond, Jost } from 'next/font/google';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-const display = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['500', '600'],
-  variable: '--font-display',
-});
-
-const body = Jost({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-body',
-});
-
-const navLinks = [
+const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Service' },
@@ -78,160 +63,282 @@ const navLinks = [
 ];
 
 function Header() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <Navbar expand="lg" className={`site-header ${display.variable} ${body.variable}`}>
-      <Container className="header-container">
-        <Navbar.Brand href="/" className="brand">
-          <img src="/Arayal.png" alt="Arayal Logo" className="logo" />
-        </Navbar.Brand>
+    <header className={`ar-header ${scrolled ? 'ar-header-scrolled' : ''}`}>
+      <div className="ar-inner">
+        <Link href="/" className="ar-brand">
+          <img src="Arayal.png" alt="Arayal Logo" className="ar-logo" />
+        </Link>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" />
+        <button
+          className="ar-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className={open ? 'ar-bar1-open' : ''} />
+          <span className={open ? 'ar-bar2-open' : ''} />
+          <span className={open ? 'ar-bar3-open' : ''} />
+        </button>
 
-        <Navbar.Collapse id="basic-navbar-nav" className="collapse-right">
-          <Nav className="ms-lg-auto nav-links">
-            {navLinks.map(({ href, label }) => (
-              <Link key={href} href={href} className="nav-link">
-                {label}
-              </Link>
-            ))}
-            <Link href="/booking" className="book-btn">
-              Book Appointment
-            </Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+        <nav className={`ar-nav ${open ? 'ar-nav-open' : ''}`}>
+          <div className="ar-links">
+            {NAV_LINKS.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`ar-link ${active ? 'ar-link-active' : ''}`}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+          <Link href="/booking" className="ar-cta" onClick={() => setOpen(false)}>
+            Book Appointment
+          </Link>
+        </nav>
+      </div>
 
-      <style jsx global>{`
-        .site-header {
-          /* Ayurveda-inspired palette: bark/wood brown, turmeric gold,
-             kumkum terracotta-red, sandalwood cream, tulsi green (used sparingly) */
-          --bark: #3d2b1f;
-          --bark-deep: #2c1f16;
-          --turmeric: #d99a34;
-          --kumkum: #a8422e;
-          --sandalwood: #f4ecd8;
-          --nav-text: #ecd9b4;
-          --tulsi: #5c6e4f;
+      <style>{`
+        .ar-header {
+          --cream: #f6f1e3;
+          --forest: #2f4a3d;
+          --gold: #c08829;
+          --clay: #a6472a;
+          --hairline: #e3d9c0;
 
-          background: linear-gradient(180deg, var(--bark) 0%, var(--bark-deep) 100%);
-          padding: 0.6rem 0;
-          border-bottom: 2px solid var(--turmeric);
-          font-family: var(--font-body), sans-serif;
+          background: var(--cream);
+          border-bottom: 1px solid var(--hairline);
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          transition: box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
-        .header-container {
+        .ar-header::after {
+          content: '';
+          display: block;
+          height: 2px;
+          background: linear-gradient(90deg, var(--gold) 0%, transparent 65%);
+          opacity: 0.6;
+        }
+
+        .ar-header-scrolled {
+          box-shadow: 0 6px 18px rgba(47, 74, 61, 0.08);
+        }
+
+        .ar-inner {
+          max-width: 1180px;
+          margin: 0 auto;
+          padding: 0 24px;
+          height: 76px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 32px;
         }
 
-        .brand {
+        .ar-brand {
           display: flex;
           align-items: center;
-          margin-right: 0;
+          gap: 12px;
+          text-decoration: none;
+          flex-shrink: 0;
         }
 
-        .logo {
-          height: 100px;
-          width: auto;
-          filter: brightness(0) invert(1);
+        .ar-logo {
+          width: 152px;
+          height: 152px;
+          object-fit: contain;
+          display: block;
         }
 
-        .toggle {
-          border-color: rgba(244, 236, 216, 0.4) !important;
+        .ar-wordmark {
+          font-family: 'Fraunces', Georgia, serif;
+          font-size: 1.5rem;
+          line-height: 1;
+          font-weight: 600;
+          color: var(--forest);
+          letter-spacing: 0.02em;
         }
 
-        .collapse-right {
-          flex-grow: 0;
+        .ar-toggle {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          gap: 5px;
+          background: none;
+          border: none;
+          padding: 8px;
+          cursor: pointer;
         }
 
-        .nav-links {
+        .ar-toggle span {
+          width: 24px;
+          height: 2px;
+          background: var(--forest);
+          display: block;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .ar-bar1-open {
+          transform: translateY(7px) rotate(45deg);
+        }
+        .ar-bar2-open {
+          opacity: 0;
+        }
+        .ar-bar3-open {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .ar-nav {
           display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 36px;
+          height: 100%;
         }
 
-        .nav-link {
-          display: inline-flex;
+        .ar-links {
+          display: flex;
+          align-items: center;
+          gap: 26px;
+          height: 100%;
+        }
+
+        .ar-link {
+          position: relative;
+          display: flex;
           align-items: center;
           height: 100%;
-          position: relative;
-          font-family: var(--font-body), sans-serif;
-          font-size: 0.95rem;
-          font-weight: 500;
-          letter-spacing: 0.02em;
-          color: var(--nav-text);
           text-decoration: none;
-          padding: 0.5rem 0.85rem;
-          transition: color 0.2s ease;
+          color: var(--forest);
+          font-family: 'Work Sans', Arial, sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          opacity: 0.85;
+          transition: opacity 0.2s ease;
         }
 
-        .nav-link::after {
+        .ar-link:hover {
+          opacity: 1;
+        }
+
+        .ar-link::after {
           content: '';
           position: absolute;
-          left: 50%;
-          bottom: 0.25rem;
-          width: 0%;
+          left: 0;
+          bottom: 24px;
           height: 2px;
-          background: var(--turmeric);
-          transition: width 0.28s ease, left 0.28s ease;
+          width: 0%;
+          background: var(--gold);
+          transition: width 0.25s ease;
         }
 
-        .nav-link:hover {
-          color: #ffffff;
+        .ar-link:hover::after {
+          width: 100%;
         }
 
-        .nav-link:hover::after {
-          width: 60%;
-          left: 20%;
+        .ar-link-active {
+          opacity: 1;
         }
 
-        .book-btn {
-          display: inline-flex;
+        .ar-link-active::after {
+          width: 100%;
+          background: var(--clay);
+        }
+
+        .ar-cta {
+          display: flex;
           align-items: center;
-          justify-content: center;
-          font-family: var(--font-display), serif;
-          font-weight: 600;
-          font-size: 1.05rem;
-          letter-spacing: 0.01em;
-          color: var(--sandalwood);
           text-decoration: none;
-          background: var(--kumkum);
-          border: 1px solid var(--kumkum);
-          border-radius: 2px;
-          padding: 0.45rem 1.3rem;
-          margin-left: 0.9rem;
-          line-height: 1.2;
-          transition: background 0.2s ease, transform 0.15s ease;
+          background: var(--clay);
+          color: var(--cream);
+          font-family: 'Work Sans', Arial, sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 0 20px;
+          height: 42px;
+          border-radius: 3px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
-        .book-btn:hover {
-          background: #c14f37;
-          color: #ffffff;
+        .ar-cta:hover {
           transform: translateY(-1px);
+          box-shadow: 0 6px 16px rgba(166, 71, 42, 0.35);
+          background: #954019;
         }
 
-        @media (max-width: 991px) {
-          .header-container {
-            flex-wrap: wrap;
+        @media (max-width: 900px) {
+          .ar-toggle {
+            display: flex;
           }
-          .nav-links {
-            align-items: flex-start;
-            flex-direction: column;
-            padding-top: 0.75rem;
-          }
-          .nav-link {
-            padding: 0.6rem 0;
+
+          .ar-nav {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
             height: auto;
+            background: var(--cream);
+            border-bottom: 1px solid var(--hairline);
+            box-shadow: 0 12px 20px rgba(47, 74, 61, 0.08);
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            padding: 8px 24px 20px;
+            display: none;
           }
-          .book-btn {
-            margin-left: 0;
-            margin-top: 0.5rem;
-            display: inline-flex;
+
+          .ar-nav-open {
+            display: flex;
+          }
+
+          .ar-links {
+            flex-direction: column;
+            align-items: flex-start;
+            height: auto;
+            gap: 4px;
+          }
+
+          .ar-link {
+            height: auto;
+            width: 100%;
+            padding: 12px 0;
+          }
+
+          .ar-link::after {
+            bottom: 8px;
+          }
+
+          .ar-cta {
+            margin-top: 12px;
+            justify-content: center;
+            width: 100%;
           }
         }
       `}</style>
-    </Navbar>
+    </header>
   );
 }
 

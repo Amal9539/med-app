@@ -28,7 +28,6 @@
 
 
 
-"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { Cormorant_Garamond, Jost } from "next/font/google";
@@ -150,7 +149,7 @@ function Page() {
         </Link>
       </section>
 
-      <style jsx global>{`
+      <style>{`
         :root {
           --leaf-green: #2f4a34;
           --leaf-green-dark: #203024;

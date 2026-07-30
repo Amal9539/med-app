@@ -39,346 +39,341 @@
 //     </div>
 //   );
 // }
-"use client"
-import Link from "next/link";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+
 import Image from "next/image";
 
-const display = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-});
-
-const body = Jost({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
-});
-
-const features = [
-  {
-    icon: "🌿",
-    title: "Holistic Approach",
-    text: "Ayurveda looks at overall wellbeing rather than focusing only on individual concerns.",
-  },
-  {
-    icon: "👩‍⚕️",
-    title: "Expert Guidance",
-    text: "Receive personalized guidance from Dr. Princy based on your individual needs.",
-  },
-  {
-    icon: "💻",
-    title: "Easy Online Access",
-    text: "Consult from the comfort of your home through a convenient online process.",
-  },
-  {
-    icon: "🥗",
-    title: "Personalized Recommendations",
-    text: "Receive practical guidance related to diet, lifestyle, and wellness.",
-  },
-  {
-    icon: "🔄",
-    title: "Continued Support",
-    text: "Follow-up consultations help you stay connected throughout your wellness journey.",
-  },
-  {
-    icon: "☯️",
-    title: "Natural Wellness Philosophy",
-    text: "Discover traditional approaches that encourage balance between body, mind, and lifestyle.",
-  },
-];
-
 export default function Home() {
+  const features = [
+    {
+      icon: '🌿',
+      title: 'Holistic Approach',
+      desc: 'Ayurveda looks at overall wellbeing rather than focusing only on individual concerns.',
+    },
+    {
+      icon: '👩\u200d⚕️',
+      title: 'Expert Guidance',
+      desc: 'Receive personalized guidance from Dr. Princy based on your individual needs.',
+    },
+    {
+      icon: '💻',
+      title: 'Easy Online Access',
+      desc: 'Consult from the comfort of your home through a convenient online process.',
+    },
+    {
+      icon: '🥗',
+      title: 'Personalized Recommendations',
+      desc: 'Receive practical guidance related to diet, lifestyle, and wellness.',
+    },
+    {
+      icon: '🤝',
+      title: 'Continued Support',
+      desc: 'Follow-up consultations help you stay connected throughout your wellness journey.',
+    },
+    {
+      icon: '⚖️',
+      title: 'Natural Wellness Philosophy',
+      desc: 'Discover traditional approaches that encourage balance between body, mind, and lifestyle.',
+    },
+  ];
+
   return (
-    <div className={`page ${display.variable} ${body.variable}`}>
-      {/* Hero */}
-      <section className="hero">
-        <div className="hero-text">
-          <span className="eyebrow">🌿 Trusted Ayurveda Consultation</span>
-          <h1>
+    <div className="ar-page">
+      <section className="ar-hero">
+        <div className="ar-hero-text">
+          <span className="ar-eyebrow">🌿 Trusted Ayurveda Consultation</span>
+          <h1 className="ar-hero-title">
             Heal Naturally.
             <br />
-            <span className="accent">Live Better with Ayurveda.</span>
+            Live Better with Ayurveda.
           </h1>
-          <p className="hero-sub">
-            Traditional Ayurvedic wisdom, guided by Dr. Princy, brought to
-            you wherever you are — for balance in body, mind, and daily
-            life.
+          <p className="ar-hero-sub">
+            Traditional healing wisdom, guided by modern care, tailored to your own body and life.
           </p>
-          <div className="hero-actions">
-            <Link href="/booking" className="btn-primary">
-              Book a Consultation
-            </Link>
-            <Link href="/doctor" className="btn-secondary">
-              Meet Dr. Princy →
-            </Link>
-          </div>
+          <a href="/booking" className="ar-hero-cta">
+            Book a Consultation
+          </a>
         </div>
 
-        <div className="hero-art">
-  <Image
-    src="/Ayurvedic-herb.jpg"
-    alt="Ayurvedic herbs and oils used in traditional treatment"
-    width={480}
-    height={480}
-    className="hero-img"
-    priority
-  />
-</div>
+        <div className="ar-hero-visual">
+          <div className="ar-hero-blob">
+            <Image
+              src="/thadam.jpeg"
+              alt="Ayurvedic herbs and oils used in traditional consultation"
+              fill
+              sizes="(max-width: 860px) 100vw, 460px"
+              className="ar-hero-img"
+              priority
+            />
+          </div>
+          <span className="ar-hero-badge">🌿 100% Natural</span>
+        </div>
       </section>
 
-      {/* Why choose */}
-      <section className="intro">
-        <h2>Why Choose ARAYAL?</h2>
-        <p>
-          A personalized approach to Ayurveda designed around your wellness
-          journey.
+      <div className="ar-divider" aria-hidden="true">
+        <svg viewBox="0 0 400 24" preserveAspectRatio="none">
+          <path
+            d="M0 12 C 40 2, 80 22, 120 12 S 200 2, 240 12 S 320 22, 360 12 S 400 2, 400 12"
+            fill="none"
+            stroke="url(#ar-divider-grad)"
+            strokeWidth="1.5"
+          />
+          <circle cx="200" cy="12" r="3" fill="#c08829" />
+          <defs>
+            <linearGradient id="ar-divider-grad" x1="0" y1="0" x2="400" y2="0">
+              <stop offset="0%" stopColor="#e3d9c0" />
+              <stop offset="50%" stopColor="#c08829" />
+              <stop offset="100%" stopColor="#e3d9c0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <section className="ar-why">
+        <h2 className="ar-why-title">Why Choose ARAYAL?</h2>
+        <p className="ar-why-sub">
+          A personalized approach to Ayurveda designed around your wellness journey.
         </p>
       </section>
 
-      {/* Features */}
-      <section className="features">
+      <section className="ar-features">
         {features.map((f) => (
-          <div className="feature-card" key={f.title}>
-            <span className="feature-icon">{f.icon}</span>
-            <h3>{f.title}</h3>
-            <p>{f.text}</p>
+          <div className="ar-card" key={f.title}>
+            <span className="ar-card-icon">{f.icon}</span>
+            <h3 className="ar-card-title">{f.title}</h3>
+            <p className="ar-card-desc">{f.desc}</p>
           </div>
         ))}
       </section>
 
-      {/* CTA banner */}
-      <section className="cta-banner">
-        <h2>Ready to begin your wellness journey?</h2>
-        <p>Take the first step toward balance, guided by Ayurvedic care.</p>
-        <Link href="/booking" className="btn-primary">
-          Book Your Consultation
-        </Link>
-      </section>
+      <style>{`
+        .ar-page {
+          --cream: #f6f1e3;
+          --cream-soft: #fbf8f0;
+          --forest: #2f4a3d;
+          --forest-soft: #5b7267;
+          --gold: #c08829;
+          --clay: #a6472a;
+          --hairline: #e3d9c0;
 
-      <style jsx global>{`
-        :root {
-          --leaf-green: #2f4a34;
-          --leaf-green-dark: #203024;
-          --turmeric: #c68a2e;
-          --sandalwood: #f4ecd8;
-          --ink: #1d2b20;
+          background: var(--cream-soft);
+          color: var(--forest);
+          font-family: 'Work Sans', Arial, sans-serif;
+          overflow-x: hidden;
         }
 
-        .page {
-          font-family: var(--font-body), sans-serif;
-          color: var(--ink);
-          background: #fffdf8;
-        }
-
-        .eyebrow {
-          display: inline-block;
-          font-size: 0.9rem;
-          font-weight: 500;
-          letter-spacing: 0.03em;
-          color: var(--leaf-green);
-          background: var(--sandalwood);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.2rem;
-        }
-
-        /* Hero */
-        .hero {
-          display: flex;
-          align-items: center;
-          gap: 3rem;
-          max-width: 1140px;
+        .ar-hero {
+          max-width: 1080px;
           margin: 0 auto;
-          padding: 4.5rem 1.5rem 4rem;
-        }
-
-        .hero-text {
-          flex: 1.1;
-        }
-
-        .hero h1 {
-          font-family: var(--font-display), serif;
-          font-size: 3.4rem;
-          line-height: 1.15;
-          font-weight: 600;
-          margin: 0 0 1.2rem;
-          color: var(--leaf-green);
-        }
-
-        .hero h1 .accent {
-          color: var(--turmeric);
-        }
-
-        .hero-sub {
-          font-size: 1.1rem;
-          line-height: 1.6;
-          max-width: 480px;
-          color: #4a4a40;
-          margin-bottom: 1.8rem;
-        }
-
-        .hero-actions {
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .btn-primary {
-          font-family: var(--font-display), serif;
-          font-weight: 600;
-          font-size: 1.05rem;
-          color: var(--ink);
-          background: var(--turmeric);
-          border: 1px solid var(--turmeric);
-          border-radius: 2px;
-          padding: 0.7rem 1.6rem;
-          text-decoration: none;
-          transition: background 0.2s ease, transform 0.15s ease;
-        }
-
-        .btn-primary:hover {
-          background: #d99b3f;
-          transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-          font-weight: 500;
-          font-size: 1rem;
-          color: var(--leaf-green);
-          text-decoration: none;
-          padding: 0.7rem 0.4rem;
-          align-self: center;
-          border-bottom: 1px solid transparent;
-          transition: border-color 0.2s ease;
-        }
-
-        .btn-secondary:hover {
-          border-color: var(--turmeric);
-        }
-
-        .hero-art {
-  flex: 1;
-  max-width: 420px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 20px 45px rgba(47, 74, 52, 0.18);
-}
-  .hero-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}
-
-        /* Intro */
-        .intro {
-          text-align: center;
-          max-width: 640px;
-          margin: 2rem auto 3rem;
-          padding: 0 1.5rem;
-        }
-
-        .intro h2 {
-          font-family: var(--font-display), serif;
-          font-size: 2.2rem;
-          color: var(--leaf-green);
-          margin-bottom: 0.6rem;
-        }
-
-        .intro p {
-          font-size: 1.05rem;
-          color: #57574c;
-        }
-
-        /* Features */
-        .features {
+          padding: 88px 24px 56px;
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          max-width: 1140px;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 48px;
+          align-items: center;
+        }
+
+        .ar-hero-text {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .ar-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: var(--cream);
+          border: 1px solid var(--hairline);
+          color: var(--forest-soft);
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 8px 18px;
+          border-radius: 999px;
+          margin-bottom: 28px;
+        }
+
+        .ar-hero-title {
+          font-family: 'Fraunces', Georgia, serif;
+          font-weight: 600;
+          font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+          line-height: 1.15;
+          color: var(--forest);
+          margin: 0 0 20px;
+        }
+
+        .ar-hero-sub {
+          font-size: 1.05rem;
+          line-height: 1.6;
+          color: var(--forest-soft);
+          max-width: 460px;
+          margin: 0 0 32px;
+        }
+
+        .ar-hero-cta {
+          text-decoration: none;
+          background: var(--clay);
+          color: var(--cream-soft);
+          font-size: 0.85rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          padding: 14px 32px;
+          border-radius: 3px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .ar-hero-cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(166, 71, 42, 0.3);
+          background: #954019;
+        }
+
+        .ar-hero-visual {
+          position: relative;
+          display: flex;
+          justify-content: center;
+        }
+
+        .ar-hero-blob {
+          position: relative;
+          width: 100%;
+          max-width: 420px;
+          aspect-ratio: 1 / 1.05;
+          border-radius: 48% 52% 54% 46% / 52% 46% 54% 48%;
+          overflow: hidden;
+          background: var(--hairline);
+          box-shadow: 0 24px 48px rgba(47, 74, 61, 0.16);
+        }
+
+        .ar-hero-img {
+          object-fit: cover;
+        }
+
+        .ar-hero-badge {
+          position: absolute;
+          bottom: 12px;
+          left: -8px;
+          background: var(--cream);
+          border: 1px solid var(--hairline);
+          color: var(--forest);
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          padding: 10px 18px;
+          border-radius: 999px;
+          box-shadow: 0 10px 20px rgba(47, 74, 61, 0.12);
+        }
+
+        .ar-divider {
+          max-width: 400px;
           margin: 0 auto;
-          padding: 0 1.5rem 4.5rem;
+          padding: 0 24px 56px;
         }
 
-        .feature-card {
-          background: var(--sandalwood);
-          border-top: 3px solid var(--turmeric);
-          border-radius: 4px;
-          padding: 1.8rem 1.6rem;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .feature-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 24px rgba(47, 74, 52, 0.12);
-        }
-
-        .feature-icon {
-          font-size: 1.7rem;
+        .ar-divider svg {
+          width: 100%;
+          height: 24px;
           display: block;
-          margin-bottom: 0.6rem;
         }
 
-        .feature-card h3 {
-          font-family: var(--font-display), serif;
-          font-size: 1.3rem;
-          color: var(--leaf-green);
-          margin: 0 0 0.5rem;
+        .ar-why {
+          max-width: 640px;
+          margin: 0 auto;
+          padding: 0 24px 48px;
+          text-align: center;
         }
 
-        .feature-card p {
-          font-size: 0.95rem;
-          line-height: 1.55;
-          color: #4a4a40;
+        .ar-why-title {
+          font-family: 'Fraunces', Georgia, serif;
+          font-weight: 600;
+          font-size: clamp(1.75rem, 3vw, 2.25rem);
+          margin: 0 0 14px;
+        }
+
+        .ar-why-sub {
+          font-size: 1rem;
+          line-height: 1.6;
+          color: var(--forest-soft);
           margin: 0;
         }
 
-        /* CTA banner */
-        .cta-banner {
-          text-align: center;
-          background: var(--leaf-green);
-          color: var(--sandalwood);
-          padding: 4rem 1.5rem;
+        .ar-features {
+          max-width: 1080px;
+          margin: 0 auto;
+          padding: 0 24px 96px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 28px;
         }
 
-        .cta-banner h2 {
-          font-family: var(--font-display), serif;
-          font-size: 2.1rem;
-          margin-bottom: 0.6rem;
+        .ar-card {
+          background: var(--cream);
+          border: 1px solid var(--hairline);
+          border-radius: 6px;
+          padding: 32px 26px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
-        .cta-banner p {
-          font-size: 1.05rem;
-          margin-bottom: 1.6rem;
-          opacity: 0.9;
+        .ar-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 14px 28px rgba(47, 74, 61, 0.1);
+          border-color: var(--gold);
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-          .hero {
-            flex-direction: column;
+        .ar-card-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: var(--cream-soft);
+          border: 1px solid var(--hairline);
+          font-size: 1.4rem;
+          margin-bottom: 18px;
+        }
+
+        .ar-card-title {
+          font-family: 'Fraunces', Georgia, serif;
+          font-weight: 600;
+          font-size: 1.15rem;
+          color: var(--forest);
+          margin: 0 0 10px;
+        }
+
+        .ar-card-desc {
+          font-size: 0.92rem;
+          line-height: 1.6;
+          color: var(--forest-soft);
+          margin: 0;
+        }
+
+        @media (max-width: 860px) {
+          .ar-hero {
+            grid-template-columns: 1fr;
             text-align: center;
-            padding-top: 3rem;
           }
-          .hero-sub {
-            margin-left: auto;
-            margin-right: auto;
+
+          .ar-hero-text {
+            align-items: center;
           }
-          .hero-actions {
-            justify-content: center;
+
+          .ar-hero-badge {
+            left: 12px;
           }
-          .features {
+
+          .ar-features {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
-        @media (max-width: 600px) {
-          .hero h1 {
-            font-size: 2.4rem;
+        @media (max-width: 560px) {
+          .ar-hero {
+            padding: 64px 20px 40px;
           }
-          .features {
+
+          .ar-features {
             grid-template-columns: 1fr;
           }
         }
